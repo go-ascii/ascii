@@ -19,6 +19,7 @@ var (
 	Lower   = Seq('a', 'z')
 	Letter  = append(Upper, Lower...)
 	Digit   = Seq('0', '9')
+	NonZero = Seq('1', '9')
 	Latin   = append(Letter, Digit...)
 	Snake   = append(Latin, '_')
 	ASCII   = Seq(0, 127)

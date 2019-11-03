@@ -40,6 +40,7 @@ var (
 	IsLowerFilter   = Range('a', 'z')
 	IsLetterFilter  = Or(IsUpperFilter, IsLowerFilter)
 	IsDigitFilter   = Range('0', '9')
+	IsNonZeroFilter = Range('1', '9')
 	IsLatinFilter   = Or(IsLetterFilter, IsDigitFilter)
 	IsSnakeFilter   = Or(IsLatinFilter, AsFilter('_'))
 	IsASCIIFilter   = Range(0, 127)
@@ -65,6 +66,9 @@ func IsLetter(c byte) bool { return IsLetterFilter(c) }
 
 // IsDigit matches a digit character.
 func IsDigit(c byte) bool { return IsDigitFilter(c) }
+
+// IsNonZero matches a non-zero digit character.
+func IsNonZero(c byte) bool { return IsNonZeroFilter(c) }
 
 // IsLatin matches a letter or a digit character.
 func IsLatin(c byte) bool { return IsLatinFilter(c) }
