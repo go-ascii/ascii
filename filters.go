@@ -41,6 +41,9 @@ var (
 	IsLetterFilter  = Or(IsUpperFilter, IsLowerFilter)
 	IsDigitFilter   = Range('0', '9')
 	IsNonZeroFilter = Range('1', '9')
+	IsBinaryFilter  = Or(AsFilter('0'), AsFilter('1'))
+	IsOctalFilter   = Range('0', '7')
+	IsHexFilter     = Or(IsDigitFilter, Range('A', 'F'), Range('a', 'f'))
 	IsLatinFilter   = Or(IsLetterFilter, IsDigitFilter)
 	IsSnakeFilter   = Or(IsLatinFilter, AsFilter('_'))
 	IsASCIIFilter   = Range(0, 127)
@@ -66,6 +69,15 @@ func IsLetter(c byte) bool { return IsLetterFilter(c) }
 
 // IsDigit matches a digit character.
 func IsDigit(c byte) bool { return IsDigitFilter(c) }
+
+// IsBinary matches a binary digit character.
+func IsBinary(c byte) bool { return IsBinaryFilter(c) }
+
+// IsOctal matches a octal digit character.
+func IsOctal(c byte) bool { return IsOctalFilter(c) }
+
+// IsHex matches a hexadecimal digit character.
+func IsHex(c byte) bool { return IsHexFilter(c) }
 
 // IsNonZero matches a non-zero digit character.
 func IsNonZero(c byte) bool { return IsNonZeroFilter(c) }

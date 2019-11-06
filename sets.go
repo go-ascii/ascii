@@ -20,6 +20,9 @@ var (
 	Letter  = append(Upper, Lower...)
 	Digit   = Seq('0', '9')
 	NonZero = Seq('1', '9')
+	Binary  = []byte{'0', '1'}
+	Octal   = Seq('0', '7')
+	Hex     = append(Digit, append(Seq('A', 'F'), Seq('a', 'f')...)...)
 	Latin   = append(Letter, Digit...)
 	Snake   = append(Latin, '_')
 	ASCII   = Seq(0, 127)
