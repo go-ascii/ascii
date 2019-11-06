@@ -31,10 +31,16 @@ func Or(filters ...Filter) Filter {
 	}
 }
 
+// Not will invert the given filter.
+func Not(filter Filter) Filter {
+	return func(c byte) bool { return !filter(c) }
+}
+
 // Filters for ASCII character sets.
 var (
 	IsNullFilter    = AsFilter(0)
-	IsControlFilter = Range(0, 31)
+	IsGraphicFilter = Range(32, 126)
+	IsControlFilter = Not(IsGraphicFilter)
 	IsSpaceFilter   = Contains(Space)
 	IsUpperFilter   = Range('A', 'Z')
 	IsLowerFilter   = Range('a', 'z')
@@ -49,8 +55,11 @@ var (
 	IsASCIIFilter   = Range(0, 127)
 )
 
-// IsNull matches a null character.
+// IsNull matches a null byte.
 func IsNull(c byte) bool { return IsNullFilter(c) }
+
+// IsGraphic matches a graphic character.
+func IsGraphic(c byte) bool { return IsGraphicFilter(c) }
 
 // IsControl matches a control byte.
 func IsControl(c byte) bool { return IsControlFilter(c) }

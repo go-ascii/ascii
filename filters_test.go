@@ -25,6 +25,7 @@ type testCaseType struct {
 
 var testCases = []testCaseType{
 	testCaseType{"Null", ascii.Null, ascii.IsNull},
+	testCaseType{"Graphic", ascii.Graphic, ascii.IsGraphic},
 	testCaseType{"Control", ascii.Control, ascii.IsControl},
 	testCaseType{"Space", ascii.Space, ascii.IsSpace},
 	testCaseType{"Upper", ascii.Upper, ascii.IsUpper},

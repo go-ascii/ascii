@@ -13,7 +13,8 @@ func Seq(begin, end byte) []byte {
 // Sets of ASCII characters grouped by common traits.
 var (
 	Null    = []byte{0}
-	Control = Seq(0, 31)
+	Graphic = Seq(32, 126)
+	Control = append(Seq(0, 31), 127)
 	Space   = []byte{' ', '\t', '\n', '\v', '\f', '\r'}
 	Upper   = Seq('A', 'Z')
 	Lower   = Seq('a', 'z')
