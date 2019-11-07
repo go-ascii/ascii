@@ -9,6 +9,7 @@ import (
 
 func filterTest(set []byte, filter ascii.Filter) func(*testing.T) {
 	return func(t *testing.T) {
+		t.Helper()
 		for b := byte(0); b < 128; b++ {
 			if ascii.Contains(set)(b) {
 				require.True(t, filter(b))
@@ -38,6 +39,7 @@ var testCases = []testCaseType{
 	testCaseType{"Latin", ascii.Latin, ascii.IsLatin},
 	testCaseType{"Snake", ascii.Snake, ascii.IsSnake},
 	testCaseType{"ASCII", ascii.ASCII, ascii.IsASCII},
+	testCaseType{"Byte", ascii.Byte, ascii.IsByte},
 }
 
 func TestFilters(t *testing.T) {

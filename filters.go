@@ -5,18 +5,30 @@ import "strings"
 // Filter represents a byte filter fucntion type.
 type Filter func(byte) bool
 
-// AsFilter creates a filter that will match only the given byte.
-func AsFilter(b byte) Filter { return func(c byte) bool { return b == c } }
-
 // Range creates a filter that will match any byte in between (inclusive).
 func Range(begin, end byte) Filter {
 	return func(c byte) bool { return begin <= c && c <= end }
 }
 
+// Is creates a filter that will match only the given byte.
+func Is(b byte) Filter { return func(c byte) bool { return b == c } }
+
 // Contains creates a filter that will match one of the given bytes.
 func Contains(p []byte) Filter {
 	s := string(p)
 	return func(c byte) bool { return strings.IndexByte(s, c) >= 0 }
+}
+
+// AsFilter attempts to create an optimized filter for the given arguments.
+func AsFilter(args ...byte) Filter {
+	switch len(args) {
+	case 0:
+		return Filter(func(byte) bool { return true })
+	case 1:
+		return Is(args[0])
+	default:
+		return Contains(args)
+	}
 }
 
 // Or will match if any one of the given filters match.
@@ -53,6 +65,7 @@ var (
 	IsLatinFilter   = Or(IsLetterFilter, IsDigitFilter)
 	IsSnakeFilter   = Or(IsLatinFilter, AsFilter('_'))
 	IsASCIIFilter   = Range(0, 127)
+	IsByteFilter    = Filter(func(byte) bool { return true })
 )
 
 // IsNull matches a null byte.
@@ -99,3 +112,6 @@ func IsSnake(c byte) bool { return IsSnakeFilter(c) }
 
 // IsASCII matcehs any ASCII character.
 func IsASCII(c byte) bool { return IsASCIIFilter(c) }
+
+// IsByte matches any Byte.
+func IsByte(c byte) bool { return IsByteFilter(c) }

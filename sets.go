@@ -27,4 +27,5 @@ var (
 	Latin   = append(Letter, Digit...)
 	Snake   = append(Latin, '_')
 	ASCII   = Seq(0, 127)
+	Byte    = Seq(0, 255)
 )
