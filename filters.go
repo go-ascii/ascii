@@ -110,7 +110,7 @@ func IsLatin(c byte) bool { return IsLatinFilter(c) }
 // IsSnake matches a latin character or an underscore.
 func IsSnake(c byte) bool { return IsSnakeFilter(c) }
 
-// IsASCII matcehs any ASCII character.
+// IsASCII matches any ASCII character.
 func IsASCII(c byte) bool { return IsASCIIFilter(c) }
 
 // IsByte matches any Byte.
