@@ -23,7 +23,7 @@ var reptbl = []string{
 
 func Rep(c byte) string {
 	if int(c) < len(reptbl) {
-		return fmt.Sprintf("`%s`", reptbl[int(c)])
+		return reptbl[c]
 	}
 	return fmt.Sprintf("0x%x", c)
 }
