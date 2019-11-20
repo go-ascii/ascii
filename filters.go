@@ -54,6 +54,7 @@ var (
 	IsGraphicFilter = Range(32, 126)
 	IsControlFilter = Not(IsGraphicFilter)
 	IsSpaceFilter   = Contains(Space)
+	IsQuoteFilter   = Contains(Quote)
 	IsUpperFilter   = Range('A', 'Z')
 	IsLowerFilter   = Range('a', 'z')
 	IsLetterFilter  = Or(IsUpperFilter, IsLowerFilter)
@@ -68,6 +69,9 @@ var (
 	IsByteFilter    = Filter(func(byte) bool { return true })
 )
 
+// False will always return false.
+func False(c byte) bool { return false }
+
 // IsNull matches a null byte.
 func IsNull(c byte) bool { return IsNullFilter(c) }
 
@@ -79,6 +83,9 @@ func IsControl(c byte) bool { return IsControlFilter(c) }
 
 // IsSpace matches a whitespace character.
 func IsSpace(c byte) bool { return IsSpaceFilter(c) }
+
+// IsQuote matches a quote character.
+func IsQuote(c byte) bool { return IsQuoteFilter(c) }
 
 // IsUpper matches an uppercase letter.
 func IsUpper(c byte) bool { return IsUpperFilter(c) }

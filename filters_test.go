@@ -29,6 +29,7 @@ var testCases = []testCaseType{
 	testCaseType{"Graphic", ascii.Graphic, ascii.IsGraphic},
 	testCaseType{"Control", ascii.Control, ascii.IsControl},
 	testCaseType{"Space", ascii.Space, ascii.IsSpace},
+	testCaseType{"Quote", ascii.Quote, ascii.IsQuote},
 	testCaseType{"Upper", ascii.Upper, ascii.IsUpper},
 	testCaseType{"Lower", ascii.Lower, ascii.IsLower},
 	testCaseType{"Letter", ascii.Letter, ascii.IsLetter},

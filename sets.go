@@ -16,6 +16,7 @@ var (
 	Graphic = Seq(32, 126)
 	Control = append(Seq(0, 31), 127)
 	Space   = []byte{' ', '\t', '\n', '\v', '\f', '\r'}
+	Quote   = []byte{'\'', '"', '`'}
 	Upper   = Seq('A', 'Z')
 	Lower   = Seq('a', 'z')
 	Letter  = append(Upper, Lower...)
