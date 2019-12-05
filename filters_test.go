@@ -4,18 +4,17 @@ import (
 	"testing"
 
 	"github.com/ktnyt/ascii"
-	"github.com/stretchr/testify/require"
+	"github.com/ktnyt/assert"
 )
 
-func filterTest(set []byte, filter ascii.Filter) func(*testing.T) {
-	return func(t *testing.T) {
-		t.Helper()
-		for b := byte(0); b < 128; b++ {
-			if ascii.Contains(set)(b) {
-				require.True(t, filter(b))
-			}
-		}
+func filterTest(set []byte, filter ascii.Filter) assert.F {
+	cases := make([]assert.F, 128)
+	for i := range cases {
+		b := byte(i)
+		v, e := filter(b), ascii.Contains(set)(b)
+		cases[i] = assert.Equal(v, e)
 	}
+	return assert.All(cases...)
 }
 
 type testCaseType struct {
@@ -44,7 +43,9 @@ var testCases = []testCaseType{
 }
 
 func TestFilters(t *testing.T) {
-	for _, testCase := range testCases {
-		t.Run(testCase.Name, filterTest(testCase.Set, testCase.Filter))
+	cases := make([]assert.F, len(testCases))
+	for i, testCase := range testCases {
+		cases[i] = assert.C(testCase.Name, filterTest(testCase.Set, testCase.Filter))
 	}
+	assert.Apply(t, cases...)
 }

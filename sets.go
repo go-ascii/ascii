@@ -2,10 +2,10 @@ package ascii
 
 // Seq generates a sequence of consecutive bytes from begin to end (inclusive).
 func Seq(begin, end byte) []byte {
-	n := end - begin + 1
+	n := int(end-begin) + 1
 	p := make([]byte, n)
-	for i := byte(0); i < n; i++ {
-		p[i] = begin + i
+	for i := range p {
+		p[i] = begin + byte(i)
 	}
 	return p
 }
