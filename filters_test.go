@@ -3,8 +3,8 @@ package ascii_test
 import (
 	"testing"
 
-	"github.com/ktnyt/ascii"
-	"github.com/ktnyt/assert"
+	"gopkg.in/ktnyt/ascii.v1"
+	"gopkg.in/ktnyt/assert.v1"
 )
 
 func filterTest(set []byte, filter ascii.Filter) assert.F {
