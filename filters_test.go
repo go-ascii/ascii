@@ -1,20 +1,6 @@
 package ascii
 
-import (
-	"testing"
-
-	assert "gopkg.in/ktnyt/assert.v1"
-)
-
-func filterTest(set []byte, filter Filter) assert.F {
-	cases := make([]assert.F, 128)
-	for i := range cases {
-		b := byte(i)
-		v, e := filter(b), Contains(set)(b)
-		cases[i] = assert.Equal(v, e)
-	}
-	return assert.All(cases...)
-}
+import "testing"
 
 var testCases = []struct {
 	name   string
